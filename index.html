@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODE RED 2026 | Tech Symposium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0f172a',
+                        darkCard: '#1e293b'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #000000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .loader-text {
+            font-size: clamp(2rem, 10vw, 5rem);
+            font-weight: 800;
+            letter-spacing: 0.5rem;
+            color: #ffffff;
+            animation: pulseText 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulseText {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.95); }
+        }
+
+        @keyframes loading {
+            0% { width: 0%; transform: translateX(-100%); }
+            100% { width: 100%; transform: translateX(100%); }
+        }
+
+        /* Fluid Typography for Hero */
+        .hero-title {
+            font-size: clamp(3rem, 15vw, 9rem);
+        }
+
+        .event-card {
+            position: relative;
+            height: 320px;
+            overflow: hidden;
+            border: none !important;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        .card-bg-img {
+            transition: transform 0.7s ease;
+        }
+
+        .event-card:hover .card-bg-img {
+            transform: scale(1.1);
+        }
+
+        #modalOverlay {
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-container {
+            transform: scale(0.9);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-active .modal-container {
+            transform: scale(1);
+        }
+
+        /* Custom Scrollbar for Modal */
+        .modal-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        .modal-container::-webkit-scrollbar-thumb {
+            background: #dc2626;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-white">
+
+    <div id="loader">
+        <div class="loader-text uppercase">Code <span class="text-red-600">RED</span></div>
+        <div class="w-48 h-1 bg-slate-800 mt-4 overflow-hidden rounded-full">
+            <div class="h-full bg-red-600 animate-[loading_1.5s_infinite_ease-in-out]"></div>
+        </div>
+    </div>
+
+    <button onclick="toggleDarkMode()"
+        class="fixed bottom-6 right-6 z-[100] w-12 h-12 md:w-14 md:h-14 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full shadow-2xl flex items-center justify-center transition-all active:scale-90">
+        <i id="theme-icon" class="fas fa-moon text-lg md:text-xl"></i>
+    </button>
+
+    <div id="main-content" class="opacity-0 transition-opacity duration-1000">
+        <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 py-4 px-6 md:px-10 flex justify-between items-center transition-colors">
+            <div class="text-xl md:text-3xl font-extrabold tracking-tighter uppercase">
+                <span class="dark:text-white">Code</span> <span class="text-red-600">RED '26</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                <a href="#about" class="hover:text-red-600 transition">About</a>
+                <a href="#events" class="hover:text-red-600 transition">Competitions</a>
+                <a href="#" class="text-red-600 border-b-2 border-red-600 px-1">Register</a>
+            </div>
+            <a href="#" class="md:hidden text-[10px] font-bold uppercase bg-red-600 text-white px-3 py-2 rounded-full">Join Now</a>
+        </nav>
+
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="image.png" class="w-full h-full object-cover grayscale" alt="College Campus">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black"></div>
+            </div>
+            <div class="container mx-auto px-4 relative z-10 text-center text-white">
+                <div data-aos="zoom-out" data-aos-duration="1500">
+                    <h4 class="text-red-500 font-bold tracking-[0.2em] md:tracking-[0.4em] uppercase mb-4 text-xs md:text-base">
+                        The Ultimate Tech Assembly
+                    </h4>
+                    <div class="mb-6 md:mb-8">
+                        <h1 class="hero-title font-black leading-none tracking-tighter uppercase inline-block">
+                            CODE<span class="text-red-600">RED</span>
+                        </h1><br><br>
+                        <div class="mt-4 md:mt-[-20px] flex flex-col items-center gap-4">
+                            <span class="inline-block border-2 border-white px-4 py-2 md:px-6 md:py-2 text-sm md:text-3xl font-bold tracking-widest uppercase bg-black/20 backdrop-blur-sm">
+                                CHMM College for Advanced Studies
+                            </span>
+                            <span class="bg-red-600 text-white px-4 py-1 text-[10px] md:text-sm font-bold rounded-full uppercase tracking-widest">
+                                EST. 2026
+                            </span>
+                        </div>
+                    </div>
+                    <p class="text-base md:text-2xl text-slate-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed px-4">
+                        Break boundaries with <span class="text-white font-semibold underline underline-offset-8 decoration-red-600">Code Red</span>. <br>
+                        A technical marathon of logic and creativity.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
+                        <a href="#events" class="w-full sm:w-auto group bg-red-600 hover:bg-white hover:text-black text-white px-10 py-4 md:px-12 md:py-5 rounded-full font-bold transition-all duration-300 flex items-center justify-center gap-3">
+                            <span class="uppercase tracking-widest text-sm md:text-base">Enter Arena</span>
+                            <i class="fas fa-arrow-right group-hover:translate-x-2 transition-transform"></i>
+                        </a>
+                        <a href="#about" class="w-full sm:w-auto px-10 py-4 md:px-12 md:py-5 rounded-full font-bold border border-white/30 hover:bg-white/10 backdrop-blur-md transition-all duration-300 uppercase tracking-widest text-sm md:text-base text-center">
+                            The Manifesto
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/50 hidden md:block">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </div>
+        </section>
+
+        <section id="events" class="py-16 md:py-20 bg-slate-50 dark:bg-slate-900 transition-colors">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-12 md:mb-16 dark:text-white uppercase tracking-tighter">
+                    Core Competitions
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="eventGrid"></div>
+            </div>
+        </section>
+    </div>
+
+    <div id="modalOverlay" class="fixed inset-0 bg-black/60 z-[200] hidden items-center justify-center p-4 transition-all">
+        <div class="modal-container max-w-5xl w-full bg-white dark:bg-slate-900 rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl flex flex-col md:flex-row relative">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-50 bg-black/20 hover:bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div class="h-48 md:h-auto md:w-2/5 relative">
+                <img id="modalImage" src="" class="absolute inset-0 w-full h-full object-cover grayscale brightness-50" alt="Event Image">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6 md:p-10">
+                    <h2 id="modalTitleSide" class="text-3xl md:text-5xl font-black text-white uppercase leading-none italic"></h2>
+                </div>
+            </div>
+
+            <div class="w-full md:w-3/5 p-6 md:p-12 flex flex-col">
+                <div class="flex items-center gap-4 mb-6">
+                    <div id="modalIconContainer" class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-red-600 flex items-center justify-center text-white text-lg md:text-xl">
+                        <i id="modalIcon" class="fas"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold text-red-600 uppercase tracking-widest">Competition Protocol</p>
+                        <h2 id="modalTitleMain" class="text-xl md:text-3xl font-black dark:text-white uppercase tracking-tighter"></h2>
+                    </div>
+                </div>
+
+                <div class="h-px w-full bg-slate-100 dark:bg-slate-800 mb-6 md:mb-8"></div>
+
+                <div class="flex-grow">
+                    <h4 class="text-[10px] md:text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-4">Rules & Regulations</h4>
+                    <ul id="modalRulesList" class="space-y-3 md:space-y-4"></ul>
+                </div>
+
+                <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                    <button class="flex-grow bg-red-600 text-white font-black py-4 md:py-5 rounded-2xl uppercase tracking-widest hover:bg-slate-900 transition-all shadow-xl shadow-red-600/20 active:scale-95 text-sm md:text-base">
+                        Initialize Registration
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('theme-icon').className = 'fas fa-sun';
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('main-content').style.opacity = '1';
+                    AOS.init({ duration: 1000, once: true });
+                }, 800);
+            }, 1000);
+        });
+
+        // Event Data updated with the 11 items from your image reference
+        const events = [
+            { title: "Red Shift Hack", img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800", icon: "fa-terminal", rules: ["The Hackathon", "Entry: ₹200", "Reward: ₹4000", "Working prototype required"] },
+            { title: "Predict OPS", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800", icon: "fa-chart-line", rules: ["Output Prediction", "Entry: ₹150", "Reward: ₹3000", "Accuracy benchmark"] },
+            { title: "Golf X", img: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=800", icon: "fa-code", rules: ["Create the short code", "Entry: ₹150", "Reward: ₹3000", "Code efficiency challenge"] },
+            { title: "Q Arena", img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800", icon: "fa-brain", rules: ["IT Quiz", "Entry: FREE", "Reward: ₹1000", "Tech trivia rounds"] },
+            { title: "Red Hunt", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800", icon: "fa-search", rules: ["No way Home", "Entry: ₹200", "Reward: ₹3000", "Technical treasure hunt"] },
+            { title: "Photography", img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800", icon: "fa-camera", rules: ["Capture the fest", "Entry: ₹50", "Reward: ₹1000", "Original shots only"] },
+            { title: "Arm Wrestling", img: "https://images.unsplash.com/photo-1758687126090-2d27aa6d69be?q=80&w=800", icon: "fa-hand-rock", rules: ["Physical strength test", "Entry: ₹200", "Reward: ₹4000", "Standard competition rules"] },
+            { title: "Maayolokam", img: "https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?q=80&w=800", icon: "fa-vr-cardboard", rules: ["The VR & Game Simulator", "Simulator: ₹100", "VR: ₹50", "Next-gen immersion"] },
+            { title: "The Smash Room", img: "https://images.unsplash.com/photo-1589131900595-345377f07297?q=80&w=800", icon: "fa-hammer", rules: ["Stress relief zone", "Entry: ₹100", "Destroy to rebuild", "Safety first"] },
+            { title: "Esports Tournament", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800", icon: "fa-gamepad", rules: ["BGMI | Free Fire | EFootball", "Entry: ₹200 (BGMI/FF) / ₹50 (EF)", "Competitive mobile gaming"] },
+            { title: "AI Prompting", img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800", icon: "fa-robot", rules: ["Generative AI challenge", "Entry: ₹30", "Reward: ₹2000", "Best prompt engineering wins"] }
+        ];
+
+        const eventGrid = document.getElementById('eventGrid');
+        events.forEach(ev => {
+            const card = document.createElement('div');
+            card.className = "event-card rounded-2xl cursor-pointer group shadow-xl";
+            card.innerHTML = `
+                <img src="${ev.img}" class="card-bg-img absolute inset-0 w-full h-full object-cover" alt="${ev.title}">
+                <div class="card-overlay absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+                    <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-red-600 text-white mb-4 transform group-hover:scale-110 transition-transform">
+                        <i class="fas ${ev.icon} text-lg md:text-xl"></i>
+                    </div>
+                    <h3 class="text-lg md:text-2xl font-black text-white uppercase tracking-tighter mb-1">${ev.title}</h3>
+                    <p class="text-[10px] text-red-400 font-bold uppercase tracking-widest flex items-center">
+                        Explore Rules <i class="fas fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
+                    </p>
+                </div>
+            `;
+            card.onclick = () => openModal(ev);
+            eventGrid.appendChild(card);
+        });
+
+        function openModal(ev) {
+            const overlay = document.getElementById('modalOverlay');
+            document.body.style.overflow = 'hidden'; // Stop background scroll
+            document.getElementById('modalImage').src = ev.img;
+            document.getElementById('modalTitleSide').innerText = ev.title;
+            document.getElementById('modalTitleMain').innerText = ev.title;
+            document.getElementById('modalIcon').className = `fas ${ev.icon}`;
+
+            const list = document.getElementById('modalRulesList');
+            list.innerHTML = ev.rules.map(r => `
+                <li class="flex items-start text-slate-600 dark:text-slate-300 font-medium group text-sm md:text-base">
+                    <span class="mt-1 w-4 h-4 md:w-5 md:h-5 rounded-md bg-red-50 dark:bg-red-900/20 text-red-600 flex-shrink-0 flex items-center justify-center mr-3 md:mr-4 group-hover:bg-red-600 group-hover:text-white transition-colors">
+                        <i class="fas fa-chevron-right text-[8px] md:text-[10px]"></i>
+                    </span>
+                    <span class="flex-grow">${r}</span>
+                </li>
+            `).join('');
+
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('modal-active'), 10);
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('modalOverlay');
+            document.body.style.overflow = 'auto'; // Re-enable background scroll
+            overlay.classList.remove('modal-active');
+            setTimeout(() => overlay.style.display = 'none', 300);
+        }
+    </script>
+</body>
+
+</html>

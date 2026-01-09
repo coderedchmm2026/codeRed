@@ -300,19 +300,25 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // THE DATA: Add your unique form links here
-        const events = [
-            { title: "Red Shift Hack", tagline: "Ultimate Coding Battle", img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800", icon: "fa-terminal", rules: ["Entry: ₹200", "Reward: ₹4000"], formLink: "https://forms.gle/link1" },
-            { title: "Predict OPS", tagline: "Data Analytics Challenge", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800", icon: "fa-chart-line", rules: ["Entry: ₹150", "Reward: ₹3000"], formLink: "https://forms.gle/link2" },
-            { title: "Golf X", tagline: "Minimalist Coding", img: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=800", icon: "fa-code", rules: ["Entry: ₹150", "Reward: ₹3000"], formLink: "https://forms.gle/link3" },
-            { title: "Q Arena", tagline: "The Ultimate IT Quiz", img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800", icon: "fa-brain", rules: ["Entry: FREE", "Reward: ₹1000"], formLink: "https://forms.gle/link4" },
-            { title: "Red Hunt", tagline: "Digital Scavenger Hunt", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800", icon: "fa-search", rules: ["Entry: ₹200", "Reward: ₹3000"], formLink: "https://forms.gle/TPyd264dFVBuM53o9" },
-            { title: "Photography", tagline: "Lens & Perspective", img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800", icon: "fa-camera", rules: ["Entry: ₹50", "Reward: ₹1000"], formLink: "https://forms.gle/link6" },
-            { title: "Arm Wrestling", tagline: "Clash of Might", img: "https://images.unsplash.com/photo-1758687126090-2d27aa6d69be?q=80&w=800", icon: "fa-hand-rock", rules: ["Entry: ₹200", "Reward: ₹4000"], formLink: "https://forms.gle/YtrEyLw9ckUSs3E59" },
-            { title: "Maayolokam", tagline: "Virtual Reality World", img: "https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?q=80&w=800", icon: "fa-vr-cardboard", rules: ["Simulator: ₹100", "VR: ₹50"], formLink: "https://forms.gle/link8" },
-            { title: "The Smash Room", tagline: "Destruction for Peace", img: "https://images.unsplash.com/photo-1589131900595-345377f07297?q=80&w=800", icon: "fa-hammer", rules: ["Entry: ₹100", "Safety first"], formLink: "https://forms.gle/link9" },
-            { title: "Esports Tournament", tagline: "Pro-Gamer Arena", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800", icon: "fa-gamepad", rules: ["BGMI | FF | EFootball", "Entry: ₹200/₹50"], formLink: "https://forms.gle/sqR9X5eAo6JP8v9T9" },
-            { title: "AI Prompting", tagline: "Master the Machine", img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800", icon: "fa-robot", rules: ["Entry: ₹30", "Reward: ₹2000"], formLink: "https://forms.gle/vbUV1ZbNURfjP39t8" }
-        ];
+       const events = [
+    { title: "Red Shift Hack", tagline: "Ultimate Hackathon", img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=800", icon: "fa-terminal", rules: ["Entry: ₹200", "Reward: ₹4000","Bring Your own Laptop | If not Inform Earlier"], formLink: "https://forms.gle/7ZCNTfHjN33PD64q9" },
+    { title: "Predict OPS", tagline: "Debugging Competition", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800", icon: "fa-chart-line", rules: ["Entry: ₹150", "Reward: ₹3000"], formLink: "https://forms.gle/y2mRGxdWUHZ3hRg69" },
+    { title: "Golf X", tagline: "The Coding Championship", img: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=800", icon: "fa-code", rules: ["Entry: ₹150", "Reward: ₹3000"], formLink: "https://forms.gle/hPUG2waJQBmK9mQH6" },
+    { title: "Q Arena", tagline: "The Ultimate IT Quiz", img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800", icon: "fa-brain", rules: ["Entry: FREE", "Reward: ₹1000"], formLink: "https://forms.gle/yVEC9PvzGddvzPWq5" },
+    { title: "Red Hunt", tagline: "Digital Scavenger Hunt", img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800", icon: "fa-search", rules: ["Entry: ₹200", "Reward: ₹3000"], formLink: "https://forms.gle/TPyd264dFVBuM53o9" },
+    { title: "Photography", tagline: "Lens & Perspective", img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=800", icon: "fa-camera", rules: ["Entry: ₹50", "Reward: ₹1000","The Concept will be Provided On The Day"], formLink: "https://forms.gle/mUyE1Jm73Abnc6XQ9" },
+    { title: "Arm Wrestling", tagline: "Clash of Might", img: "https://images.unsplash.com/photo-1758687126090-2d27aa6d69be?q=80&w=800", icon: "fa-hand-rock", rules: ["Entry: ₹200", "Reward: ₹4000"], formLink: "https://forms.gle/YtrEyLw9ckUSs3E59" },
+    { title: "Maayolokam", tagline: "Virtual Reality World", img: "https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?q=80&w=800", icon: "fa-vr-cardboard", rules: ["Simulator: ₹100", "VR: ₹50","No Registration required | Spot Registration"], formLink: "https://forms.gle/link8" },
+    { title: "The Smash Room", tagline: "Destruction for Peace", img: "https://images.unsplash.com/photo-1612117750856-79d6b2ce3998?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", icon: "fa-hammer", rules: ["Entry: ₹100", "Safety first","No Registration required | Spot Registration"], formLink: "https://forms.gle/link9" },
+    { title: "Esports Tournament", tagline: "Pro-Gamer Arena", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800", icon: "fa-gamepad", rules: ["BGMI | FF | EFootball", "Entry: ₹200|₹200|₹50"], formLink: "https://forms.gle/sqR9X5eAo6JP8v9T9" },
+    { title: "AI Prompting", tagline: "Master the Machine", img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800", icon: "fa-robot", rules: ["Entry: ₹30", "Reward: ₹2000"], formLink: "https://forms.gle/vbUV1ZbNURfjP39t8" },
+    
+    // --- New Fields Added Below ---
+    { title: "Spot Choreography", tagline: "Dance to the Beat", img: "https://images.unsplash.com/photo-1535525153412-5a42439a210d?q=80&w=800", icon: "fa-music", rules: ["Entry: ₹ 30", "Reward: Exciting Prizes", "On the Spot Music Selection"], formLink: "https://forms.gle/link10" },
+    { title: "Fun & Entertainment", tagline: "The Chill Zone", img: "https://images.unsplash.com/photo-1648739290708-22c0b5655a95?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", icon: "fa-laugh-beam", rules: ["Fun Games", "Chill Zone", "Play games and have fun"], formLink: "https://forms.gle/link11" },
+    { title: "Food Carnival", tagline: "Taste the Flavors", img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800", icon: "fa-utensils", rules: ["Multiple Stalls", "Variety of Cuisines", "Pay per Plate"], formLink: "https://forms.gle/link12" },
+    { title: "Tech Expo", tagline: "Innovations Unveiled", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800", icon: "fa-microchip", rules: ["Entry: FREE", "Showcasing Future Tech", "Open for All"], formLink: "https://forms.gle/link13" }
+];
 
         // Dark Mode Logic
         function toggleDarkMode() {
@@ -362,6 +368,7 @@
                     <p class="text-[10px] text-white/60 font-bold uppercase tracking-widest flex items-center">
                         Explore Rules <i class="fas fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"></i>
                     </p>
+                    
                 </div>
             `;
             card.onclick = () => openModal(ev);

@@ -312,7 +312,18 @@
     { title: "Arm Wrestling", tagline: "Clash of Might", img: "https://images.unsplash.com/photo-1758687126090-2d27aa6d69be?q=80&w=800", icon: "fa-hand-rock", rules: ["Entry: ₹200", "Reward: ₹4000"], formLink: "https://forms.gle/YtrEyLw9ckUSs3E59" },
     { title: "Maayolokam", tagline: "Virtual Reality World", img: "https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?q=80&w=800", icon: "fa-vr-cardboard", rules: ["Simulator: ₹100", "VR: ₹50","No Registration required | Spot Registration"], formLink: "https://forms.gle/link8" },
     { title: "The Smash Room", tagline: "Destruction for Peace", img: "https://images.unsplash.com/photo-1612117750856-79d6b2ce3998?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", icon: "fa-hammer", rules: ["Entry: ₹100", "Safety first","No Registration required | Spot Registration"], formLink: "https://forms.gle/link9" },
-    { title: "Esports Tournament", tagline: "Pro-Gamer Arena", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800", icon: "fa-gamepad", rules: ["BGMI | FF | EFootball", "Entry: ₹200|₹200|₹50"], formLink: "https://forms.gle/sqR9X5eAo6JP8v9T9" },
+{ 
+    title: "Esports Tournament", 
+    tagline: "Pro-Gamer Arena", 
+    img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=800", 
+    icon: "fa-gamepad", 
+    rules: ["BGMI | FF | E-Football", "Entry: ₹200 | ₹200 | ₹50"], 
+    links: [
+        { name: "BGMI", url: "https://forms.gle/j1SfnjeqjsrvJeV18" },
+        { name: "Free Fire", url: "https://forms.gle/qi3trkzb6AcrJ5Gt7" },
+        { name: "E-Football", url: "https://forms.gle/TsApYZ7E6ESVKCF87" }
+    ]
+},
     { title: "AI Prompting", tagline: "Master the Machine", img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800", icon: "fa-robot", rules: ["Entry: ₹30", "Reward: ₹2000"], formLink: "https://forms.gle/vbUV1ZbNURfjP39t8" },
     
     // --- New Fields Added Below ---
@@ -378,39 +389,70 @@
         });
 
         // Modal Logic
-        function openModal(ev) {
-            const overlay = document.getElementById('modalOverlay');
-            const regBtn = document.getElementById('modalRegBtn');
-            
-            document.body.style.overflow = 'hidden';
-            document.getElementById('modalImage').src = ev.img;
-            document.getElementById('modalTitleSide').innerText = ev.title;
-            document.getElementById('modalTitleMain').innerText = ev.title;
-            document.getElementById('modalTagline').innerText = ev.tagline;
-            document.getElementById('modalIcon').className = `fas ${ev.icon}`;
+       function openModal(ev) {
+    const overlay = document.getElementById('modalOverlay');
+    const regBtn = document.getElementById('modalRegBtn');
+    
+    document.body.style.overflow = 'hidden';
+    document.getElementById('modalImage').src = ev.img;
+    document.getElementById('modalTitleSide').innerText = ev.title;
+    document.getElementById('modalTitleMain').innerText = ev.title;
+    document.getElementById('modalTagline').innerText = ev.tagline;
+    document.getElementById('modalIcon').className = `fas ${ev.icon}`;
 
-            const list = document.getElementById('modalRulesList');
-            list.innerHTML = ev.rules.map(r => `
-                <li class="flex items-start text-slate-600 dark:text-slate-300 font-medium group text-sm md:text-base">
-                    <span class="mt-1 w-4 h-4 md:w-5 md:h-5 rounded-md bg-red-50 dark:bg-red-900/20 text-red-600 flex-shrink-0 flex items-center justify-center mr-3 md:mr-4 group-hover:bg-red-600 group-hover:text-white transition-colors">
-                        <i class="fas fa-chevron-right text-[8px] md:text-[10px]"></i>
-                    </span>
-                    <span class="flex-grow">${r}</span>
-                </li>
-            `).join('');
+    // Update Rules List
+    const list = document.getElementById('modalRulesList');
+    list.innerHTML = ev.rules.map(r => `
+        <li class="flex items-start text-slate-600 dark:text-slate-300 font-medium group text-sm md:text-base">
+            <span class="mt-1 w-4 h-4 md:w-5 md:h-5 rounded-md bg-red-50 dark:bg-red-900/20 text-red-600 flex-shrink-0 flex items-center justify-center mr-3 md:mr-4 group-hover:bg-red-600 group-hover:text-white transition-colors">
+                <i class="fas fa-chevron-right text-[8px] md:text-[10px]"></i>
+            </span>
+            <span class="flex-grow">${r}</span>
+        </li>
+    `).join('');
 
-            // UPDATE THE BUTTON LINK HERE
-            regBtn.onclick = () => {
-                if(ev.formLink) {
-                    window.open(ev.formLink, '_blank');
-                } else {
-                    alert("Registration for this event will open soon!");
-                }
-            };
+    // --- LOGIC FOR ESPORTS VS OTHERS ---
+    const btnContainer = regBtn.parentElement; // Get the container of the button
 
-            overlay.style.display = 'flex';
-            setTimeout(() => overlay.classList.add('modal-active'), 10);
+    if (ev.title === "Esports Tournament" && ev.links) {
+        // Hide the default button and inject three new buttons
+        regBtn.style.display = 'none';
+        
+        // Check if we already injected the esports buttons to avoid duplicates
+        let esportsGroup = document.getElementById('esportsBtnGroup');
+        if (!esportsGroup) {
+            esportsGroup = document.createElement('div');
+            esportsGroup.id = 'esportsBtnGroup';
+            esportsGroup.className = 'grid grid-cols-1 gap-3';
+            btnContainer.appendChild(esportsGroup);
         }
+        
+        esportsGroup.style.display = 'grid';
+        esportsGroup.innerHTML = ev.links.map(game => `
+            <button onclick="window.open('${game.url}', '_blank')" 
+                class="w-full bg-slate-900 dark:bg-white dark:text-slate-900 text-white font-bold py-3 rounded-xl uppercase tracking-widest hover:bg-red-600 hover:text-white transition-all text-xs border-2 border-transparent">
+                Register for ${game.name}
+            </button>
+        `).join('');
+
+    } else {
+        // Show default button for all other events
+        regBtn.style.display = 'block';
+        const esportsGroup = document.getElementById('esportsBtnGroup');
+        if (esportsGroup) esportsGroup.style.display = 'none';
+
+        regBtn.onclick = () => {
+            if(ev.formLink) {
+                window.open(ev.formLink, '_blank');
+            } else {
+                alert("Registration for this event will open soon!");
+            }
+        };
+    }
+
+    overlay.style.display = 'flex';
+    setTimeout(() => overlay.classList.add('modal-active'), 10);
+}
 
         function closeModal() {
             const overlay = document.getElementById('modalOverlay');
